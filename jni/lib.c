@@ -28,8 +28,22 @@ extern "C" {
         void* ptr = env->GetDirectBufferAddress(buffer);
         jlong length = env->GetDirectBufferCapacity(buffer);
 
-        if(ptr != nullptr && length > 0) {
+        if(ptr != NULL && length > 0) {
             munmap(ptr, length);
         }
     }
+
+    static void* initial_brk = NULL;
+
+    JNIEXPORT jobject JNICALL
+    Java_Mem_sbrk(JNIEnv* env, jobject obj, jlong size) {
+        if(initial_brk == NULL)
+            initial_brk = sbrk(0);
+
+        void* ptr = sbrk(size);
+        if (ptr == NULL || size <= 0)
+            return NULL;
+        return env->NewDirectByteBuffer(ptr, size);
+    }
+
 }

@@ -23,6 +23,14 @@ JNIEXPORT jobject JNICALL Java_Mem_alloc
 JNIEXPORT void JNICALL Java_Mem_free
   (JNIEnv *, jobject, jobject);
 
+/*
+ * Class:     Mem
+ * Method:    sbrk
+ * Signature: (J)Ljava/nio/ByteBuffer;
+ */
+JNIEXPORT jobject JNICALL Java_Mem_sbrk
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif
