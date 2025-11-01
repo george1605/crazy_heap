@@ -6,6 +6,7 @@ public class Mem {
     public native java.nio.ByteBuffer alloc(long pages, int flags);
     public native void free(java.nio.ByteBuffer buffer);
     public native java.nio.ByteBuffer sbrk(long size);
+    public native void brkclean();
 
     public static void main(String[] args) {
         Mem vm = new Mem();
@@ -13,7 +14,7 @@ public class Mem {
         buffer.putInt(0, 900);    
         int x = buffer.getInt(0); 
         System.out.println(x); 
-        vm.sbrk(-10); // free the 10 bytes allocated
+        vm.brkclean();
         // vm.free(buffer); // free the buffer -> JNI -> munmap()
     }
 }

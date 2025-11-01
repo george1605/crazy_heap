@@ -46,4 +46,15 @@ extern "C" {
         return env->NewDirectByteBuffer(ptr, size);
     }
 
+    JNIEXPORT void JNICALL
+    Java_Mem_brkclean(JNIEnv* env, jobject obj) {
+        jclass exceptionClass = env->FindClass("java/lang/IllegalStateException");
+        if(initial_brk == NULL)
+        {
+            env->ThrowNew(exceptionClass, "initial_brk is null.");
+        } else {
+            brk(initial_brk);
+        }
+    }
+
 }

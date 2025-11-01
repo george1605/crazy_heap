@@ -31,6 +31,14 @@ JNIEXPORT void JNICALL Java_Mem_free
 JNIEXPORT jobject JNICALL Java_Mem_sbrk
   (JNIEnv *, jobject, jlong);
 
+/*
+ * Class:     Mem
+ * Method:    brkclean
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_Mem_brkclean
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

@@ -26,4 +26,16 @@ namespace mem
         void* alloc(size_t size);
         void free(size_t size); 
     };
+
+    class freelist
+    {
+    private:
+        void* ptr;
+        int flags;
+        size_t size;
+        freelist* next;
+    public:
+        freelist();
+        void* find(size_t size, int flags); // must have this->flags & flags && this->size > size if not checks for next
+    };
 }
